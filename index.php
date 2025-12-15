@@ -35,11 +35,20 @@ $conferences = $stm->fetchAll();
     </tr>
   </thead>
   <tbody>
-   
+    <?php foreach ($conferences as $conference): ?>   
     <tr class="table-light">
-
+      <td><?= $conference['id']; ?></td>
+      <td><?= $conference['prenom'] . ' ' . $conference['nom']; ?></td>
+      <td><?= $conference['email']; ?></td>
+      <td><?= $conference['type_participant']; ?></td>
+      <td><?= $conference['centres_interet']; ?></td>
+      <td><a href="" class="btn btn-info">Voir</a> 
+      <a href="" class="btn btn-secondary">Editer</a> 
+      <a href="supp-conf.php?id=<?= $conference['id']; ?>" class="btn btn-warning"
+      onclick="return confirm('Etes vous certain de vouloir suprimer cette conference ?');"
+      >Suprimer</a></td>
     </tr>
-
+    <?php endforeach; ?>
   </tbody>
 </table>
 </div>
