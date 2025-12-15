@@ -22,6 +22,12 @@ $conferences = $stm->fetchAll();
 <body>
 <?php include 'nav.php'; ?>
 <div class="container mt-4">
+    <?php
+    if (count($conferences) === 0) : ?>
+        <div class="alert alert-warning">Aucune formation n'est disponible !</div>
+    <?php 
+  die();
+  endif; ?>
     <h2>Liste des conférences</h2>
     <table class="table table-hover">
   <thead>
