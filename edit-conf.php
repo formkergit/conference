@@ -18,16 +18,18 @@ $conference = $stm->fetch();
 // ===============================================
 // VARIABLES FORMULAIRE
 // ===============================================
-$nom = '';
-$prenom = '';
-$email = '';
+$nom = $conference['nom'];
+$prenom =  $conference['prenom'];
+$email =  $conference['email'];
 $password = '';
 $password_confirm = '';
-$date_naissance = '';
-$telephone = '';
-$pays = '';
-$type = '';
-$centres_interet = [];
+$date_naissance =  $conference['date_naissance'];
+$telephone = $conference['telephone'];
+$pays = $conference['pays'];
+$type_array = explode(',',$conference['type_participant']);
+$type = $type_array;
+$centres_interet_array = explode(',',$conference['centres_interet']);
+$centres_interet = $centres_interet_array ;
 $errors = [];
 
 $liste_pays = ["France", "Belgique", "Suisse", "Canada"];
@@ -320,7 +322,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['envoyer'])) {
         <!-- CENTRES D'INTERET -->
         <div class="mt-4">
             <label class="form-label">Centres d’intérêt</label><br>
-
             <?php foreach ($interets_acceptes as $ci): ?>
                 <label>
                     <input type="checkbox" name="centres_interet[]" value="<?= $ci ?>"
@@ -334,22 +335,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['envoyer'])) {
             <?php endif; ?>
         </div>
 
-        <!-- CONDITIONS -->
-        <div class="mt-4">
-            <label>
-                <input type="checkbox" name="conditions" value="1"
-                    <?= !empty($_POST['conditions']) ? 'checked' : '' ?>>
-                J’accepte les conditions générales
-            </label>
-            <?php if (!empty($errors['conditions'])): ?>
-                <div class="alert alert-warning mt-1"><?= $errors['conditions'] ?></div>
-            <?php endif; ?>
-        </div>
-
         <!-- SUBMIT -->
         <br>
         <div class="d-grid gap-2">
-            <button class="btn btn-lg btn-success" type="submit" name="envoyer">Envoyer</button>
+            <button class="btn btn-lg btn-success" type="submit" name="envoyer">Mettre à jour</button>
         </div>
 
     </form>
